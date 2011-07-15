@@ -37,7 +37,7 @@ if(isset($_POST['submit'])){
 </thead>
 <tbody>
 <?php
-foreach($bookmarks->read() as $mark){
+foreach($bookmarks->query("SELECT * FROM bookmarks ORDER BY id DESC LIMIT 5") as $mark){
 	echo '<tr><td>'.$mark['name'].'</td><td><a href="'.$mark['url'].'">'.substr($mark['url'],7).'</a></td></tr>';
 }
 ?>
