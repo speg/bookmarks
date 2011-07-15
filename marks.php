@@ -15,17 +15,18 @@ $bookmarks = new Bookmark();
 </head>
 <body>
 <h2>Your Marks</h2>
+<table>
 <thead>
 </thead>
-<table>
 <tbody>
 <?php
 foreach($bookmarks->read() as $mark){
-	echo '<tr><td>'.$mark['name'].'</td><td><a href="'.$mark['url'].'">'.substr($mark['url'],7).'</a></td><td><a href="delete.php?id='.$mark['id'].'">delete</a></td></tr>';
+	echo '<tr><td><a href="action.php?action=like&id='.$mark['id'].'">&hearts;</a></td><td>'.$mark['name'].'</td><td><a href="'.$mark['url'].'">'.substr($mark['url'],7).'</a></td><td><a href="action.php?action=delete&id='.$mark['id'].'">delete</a></td></tr>';
 }
 ?>
 </tbody>
 </table>
-
+<a href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://test.dev/bookmarks/bookmarklet.js';})();">Bookmarklet</a>&nbsp;&larr;Drag this to your bookmarks bar to add pages with one click!<br />
+<a href="index.php">Home</a>
 </body>
 </html>

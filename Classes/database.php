@@ -34,13 +34,16 @@ class SH_Database{
 	
 	function resultArray($type = MYSQL_BOTH){
 		$return = array();
-		while($row = mysql_fetch_array($this->result,$type)){
-			$r = array();
-			foreach($row as $key=>$field){
-				$r[$key] = htmlentities($field);
-			}			
-			$return[]=$r;
-		}
+		if(is_resource($this->result)){
+			while($row = mysql_fetch_array($this->result,$type)){
+				$r = array();
+				foreach($row as $key=>$field){
+					$r[$key] = htmlentities($field);
+				}			
+				$return[]=$r;
+			}
+		}else $return = $this->result;
+		
 		return $return;
 	}
 	
@@ -50,8 +53,8 @@ class SH_Database{
 class SH_CRUD{
 	//basic class to provide CRUD functions to models
 	
-	protected $db;
-	protected $table;
+	private $db;
+	private $table;
 	
 	function __construct($tbl){
 		$this->db = SH_Database::singleton();
@@ -145,6 +148,12 @@ class Bookmark extends SH_CRUD{
 								'url'	=>strpos($url,'http://') === 0 ? $url : 'http://'.$url
 		));
 	
+	}
+	
+	function like($id){
+		$likes = $this->query("SELECT favourite FROM bookmarks WHERE id = '$id'");
+		$newLikes = (int) $likes[0][0] + 1;
+		$this->query("UPDATE bookmarks SET favourite = '$newLikes' WHERE id = '$id'");
 	}
 
 
