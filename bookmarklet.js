@@ -12,8 +12,7 @@ function runthis() {
 	// your JavaScript code goes here!
 	var title = document.title;
 	var location = document.location;
-	var url = 'http://test.dev/bookmarks/action.php?action=add&name='+encodeURI(title)+'&url='+encodeURI(location);
-
+	var url = 'http://test.dev/bookmarks/action.php?action=add&name='+encodeURI(title)+'&url='+encodeURI(location)+'&k=1';
 	$("body").append("<iframe src='"+url+"' style='display:none;'></iframe>");
 
 }

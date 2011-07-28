@@ -1,9 +1,11 @@
 <?php
 
 $action = $_REQUEST['action'];
-
 include('Classes/database.php');
-$bookmarks = new Bookmark();
+//map key to userid…
+$id = $_REQUEST['k'];
+
+$bookmarks = new User_Bookmark($id);
 
 switch($action){
 	case 'delete':

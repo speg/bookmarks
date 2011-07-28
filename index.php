@@ -1,10 +1,17 @@
 <?php
 include('Classes/database.php');
+include('Classes/functions.php');
 $bookmarks = new Bookmark();
 
 if(isset($_POST['submit'])){
 	//echo "<pre>".print_r($_POST,TRUE)."</pre>";	
 	$bookmarks->add($_POST['name'],$_POST['url']);
+}
+
+if(startSession()){
+	$loggedIn = true;
+}else{
+	$loggedIn = false;
 }
 
 ?>
@@ -18,7 +25,16 @@ if(isset($_POST['submit'])){
 <![endif]-->
 </head>
 <body>
+<?php
 
+if($loggedIn){
+	echo "<a href='authenticate/logout.php'>Logout</a>".$_SESSION['userid'];
+}else{
+	echo "<a href='authenticate/login_form.php'>Login</a>";
+
+}
+
+?>
 <h1>Bookmarkly</h1>
 <h3>Share your bookmarks with the world!</h3>
 
@@ -38,7 +54,7 @@ if(isset($_POST['submit'])){
 <tbody>
 <?php
 foreach($bookmarks->query("SELECT * FROM bookmarks ORDER BY id DESC LIMIT 5") as $mark){
-	echo '<tr><td>'.$mark['name'].'</td><td><a href="'.$mark['url'].'">'.substr($mark['url'],7).'</a></td></tr>';
+	echo '<tr><td>'.$mark['title'].'</td><td><a href="'.$mark['url'].'">'.substr($mark['url'],7).'</a></td></tr>';
 }
 ?>
 </tbody>

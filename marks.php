@@ -1,6 +1,9 @@
 <?php
 include('Classes/database.php');
+include('Classes/Functions.php');
+startSession();
 $bookmarks = new Bookmark();
+
 
 //this page will show you all your bookmarks and let you manage them.
 ?>
