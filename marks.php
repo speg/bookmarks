@@ -2,14 +2,13 @@
 include('Classes/database.php');
 include('Classes/Functions.php');
 startSession();
-$bookmarks = new Bookmark();
-
-
+$bookmarks = new User_Bookmark($_SESSION['userid']);
 //this page will show you all your bookmarks and let you manage them.
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="style.css" />
 <meta charset="utf-8" />
 <title>Your Bookmarks</title>
 <!--[if IE]>

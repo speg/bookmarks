@@ -17,9 +17,17 @@ $test->equals($a[0]['id'],0);
 $a = $bookmarks->read(array('title'=>'I SHOULD NOT EXIST'));
 $test->equals(empty($a),TRUE);
 
-//Test User creates a bookmark 
+//Test 3: User creates a bookmark 
 $a = $user_bookmark->add('theTitle','http://theURL','aNote');
 $test->equals($a,false);
+
+//Test 4: View User Specific Bookamrks
+$a = $user_bookmark->read();
+var_dump($a);
+if(empty($a))$a=false;
+else $a = true;
+
+$test->equals($a,true);
 
 
 $test->report();

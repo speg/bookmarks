@@ -9,12 +9,12 @@ $bookmarks = new User_Bookmark($id);
 
 switch($action){
 	case 'delete':
-		$bookmarks->delete($_REQUEST['id']);
-		header('Location: http://shiemstr.dev/bookmarks/marks.php');
+		$bookmarks->delete(array('bookmark_id'=>$_REQUEST['id']));
+		header('Location: http://test.dev/bookmarks/marks.php');
 		break;
 	case 'like':
 		$bookmarks->like($_REQUEST['id']);
-		header('Location: http://shiemstr.dev/bookmarks/marks.php');
+		header('Location: http://test.dev/bookmarks/marks.php');
 		break;
 	case 'add':
 		$bookmarks->add($_REQUEST['name'],$_REQUEST['url']);

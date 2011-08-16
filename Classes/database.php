@@ -52,8 +52,8 @@ class SH_Database{
 class SH_CRUD{
 	//basic class to provide CRUD functions to models
 	
-	private $db;
-	private $table;
+	protected $db;
+	protected $table;
 	
 	function __construct($tbl){
 		$this->db = SH_Database::singleton();
@@ -131,7 +131,21 @@ class SH_CRUD{
 	}
 	
 	function delete($id){
-		$s = sprintf("DELETE FROM %s WHERE id = '%s'",$this->table,$id);
+		if(is_array($id)){
+			//they want specific columns matched
+			$where = '';
+			foreach($id as $key=>$value){
+				$where .= "$key = '$value' AND ";
+			}
+			$where = substr($where,0,-5);	//trim off the last "AND" 
+			$s = sprintf("DELETE FROM %s WHERE %s",$this->table,$where);			
+		}elseif(is_numeric($input)){
+			//just a plain old delete ID
+			$s = sprintf("DELETE FROM %s WHERE id = '%s'",$this->table,$input);
+		}else{
+			//i dunno...
+			return false;
+		}		
 		$this->db->doQuery($s);	
 	}
 	
@@ -184,11 +198,11 @@ class User_Bookmark extends SH_CRUD{
 	private $userid;
 
 	function __construct($id){
-		parent::__construct('user_bookmark');
+		parent::__construct('user_bookmarks');
 		$this->bookmark = new Bookmark();
 		$this->user = new User($id);	//DO WE REALLY NEED USER in here?
 		$this->userid = $id;
-		echo "userid created: $id |\n";
+		//echo "userid created: $id |\n";
 	}
 	
 	function add($title,$url,$note=null){
@@ -209,6 +223,15 @@ class User_Bookmark extends SH_CRUD{
 			));
 		}else return false;
 	}
+	
+	function read(){
+		//read only bookmarks that belong to this ID
+		$s = sprintf("SELECT * FROM %s INNER JOIN bookmarks ON bookmarks.id = user_bookmarks.bookmark_id WHERE user_bookmarks.user_id = %s",$this->table,$this->userid);
+		$this->db->doQuery($s);
+		return $this->db->resultArray();	
+		//SEND THIS STRING TO CRUD
+	}
+
 }
 
 
