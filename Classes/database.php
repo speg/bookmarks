@@ -5,8 +5,8 @@ class SH_Database{
 	protected $connection;
 	
 	private function __construct(){
-		$this->connection = mysql_connect("localhost","server_bot","bot_me");
-		mysql_select_db("test_project");	//DEFAULT database = test_project
+		$this->connection = mysql_connect("localhost","root","root");
+		mysql_select_db("ffavourites");	//DEFAULT database = test_project
 	}
 	
 	public static function singleton(){

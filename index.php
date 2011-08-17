@@ -20,7 +20,7 @@ if(startSession()){
 <html>
 <head>
 <meta charset="utf-8" />
-<title>FFavourites &hearts;</title>
+<title>ffavourites &hearts;</title>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -37,8 +37,8 @@ if($loggedIn){
 
 }
 ?>
-	<h1>&hearts; FFavourites</h1>
-	<h2>Your FFavourite sites. &hearts;</h2>	
+	<h1>&hearts; ffavourites</h1>
+	<h2>your ffavourite sites. &hearts;</h2>	
 </div>
 
 <!--
@@ -54,7 +54,7 @@ if($loggedIn){
 -->
 <div class="bodywrapper">
 <div class="box">
-<h4>New &hearts;'s</h4>
+<h4>New &hearts;</h4>
 
 <?php
 $l = array();
@@ -64,7 +64,7 @@ foreach($bookmarks->query("SELECT * FROM bookmarks ORDER BY id DESC LIMIT 5") as
 echo implode(" <br /> ",$l);
 ?>
 </div>
-<div class="box"><h4>Popular &hearts;'s</h4>
+<div class="box"><h4>Popular &hearts;</h4>
 
 <?php
 $l = array();
@@ -78,13 +78,14 @@ echo implode(" <br /> ",$l);
 
 <?php
 if($loggedIn):
-echo "<div class='box'><h4>Your &hearts;'s</h4>";
+echo "<div class='box'><h4>Yours &hearts;</h4>";
 $l = array();
 foreach($user->read() as $mark){
 	$l[] .= '<a href="'.$mark['url'].'">'.$mark['title'].'</a>';
 }
 echo implode(" <br /> ",$l);
 echo "</div>";
+echo "<a href='marks.php'>Your &hearts;</a>";
 endif;
 ?>
 

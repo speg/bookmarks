@@ -4,9 +4,9 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 //connect to the database here
 $dbhost = 'localhost';
-$dbname = 'test_project';
-$dbuser = 'server_bot';
-$dbpass = 'bot_me'; //not really
+$dbname = 'ffavourites';
+$dbuser = 'root';
+$dbpass = 'root'; //not really
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 mysql_select_db($dbname, $conn);
 //
@@ -34,4 +34,4 @@ session_regenerate_id (); //this is a security measure
 $_SESSION['valid'] = 1;
 $_SESSION['userid'] = $userData['id'];
 
-header('Location: /bookmarks/');
+header('Location: /');

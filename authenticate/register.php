@@ -18,9 +18,9 @@ $hash = hash('whirlpool', $salt . $pass1);
 //$hash = $salt.$pass1;
 
 $dbhost = 'localhost';
-$dbname = 'test_project';
-$dbuser = 'server_bot';
-$dbpass = 'bot_me'; //not really
+$dbname = 'ffavourites';
+$dbuser = 'root';
+$dbpass = 'root'; //not really
 $conn = mysql_connect($dbhost, $dbuser, $dbpass);
 mysql_select_db($dbname, $conn);
 //sanitize username
